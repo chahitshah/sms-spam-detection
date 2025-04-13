@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Prediction Result</h2>
+        <p><strong>Text:</strong> {{ text }}</p>
+        <p><strong>Prediction:</strong> {{ prediction }} (Confidence: {{ confidence }})</p>
+        <p><strong>Category:</strong> {{ category }}</p>
+
+        <form action="/feedback" method="POST">
+            <input type="hidden" name="text" value="{{ text }}">
+            <input type="hidden" name="prediction" value="{{ prediction }}">
+            <input type="hidden" name="category" value="{{ category }}">
+            <p>Was this prediction helpful?</p>
+            <button type="submit" name="feedback" value="positive">👍 Yes</button>
+            <button type="submit" name="feedback" value="negative">👎 No</button>
+        </form>
+        <br>
+        <a href="/">Check another message</a><br>
+        <a href="/download_csv">Download Feedback CSV</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 960px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+textarea {
+    width: 80%;
+    height: 100px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 30px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.stats {
+    background: #e8f0fe;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+canvas {
+    max-width: 400px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.history th, .history td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.history a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #007bff;
+    text-decoration: none;
+}

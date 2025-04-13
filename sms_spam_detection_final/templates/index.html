@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SMS Spam Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 SMS Spam Detection</h1>
+
+        <form method="POST" action="/predict">
+            <textarea name="text" placeholder="Enter SMS message..." required></textarea>
+            <button type="submit">Predict</button>
+        </form>
+
+        <div class="stats">
+            <h2>📊 Stats</h2>
+            <p><strong>Total:</strong> {{ total }}</p>
+            <p><strong>Spam:</strong> {{ spam_count }}</p>
+            <p><strong>Not Spam:</strong> {{ ham_count }}</p>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="pieChart"></canvas>
+            <canvas id="barChart"></canvas>
+        </div>
+
+        <div class="history">
+            <h2>📝 Prediction History</h2>
+            <table>
+                <tr>
+                    <th>Text</th>
+                    <th>Prediction</th>
+                    <th>Confidence</th>
+                    <th>Category</th>
+                </tr>
+                {% for h in history %}
+                <tr>
+                    <td>{{ h.text }}</td>
+                    <td>{{ h.prediction }}</td>
+                    <td>{{ h.confidence }}</td>
+                    <td>{{ h.category }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <!-- Link to download the CSV file -->
+            <a href="/download_csv">Download Prediction History CSV</a>
+        </div>
+    </div>
+
+    <script>
+        const pieCtx = document.getElementById('pieChart');
+        const barCtx = document.getElementById('barChart');
+
+        const spamCount = {{ spam_count or 0 }};
+        const hamCount = {{ ham_count or 0 }};
+
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Spam', 'Not Spam'],
+                datasets: [{
+                    data: [spamCount, hamCount],
+                    backgroundColor: ['#f44336', '#4caf50']
+                }]
+            }
+        });
+
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Phishing', 'Promotion', 'General'],
+                datasets: [{
+                    label: 'Spam Categories',
+                    data: [
+                        {{ categories['Phishing'] or 0 }},
+                        {{ categories['Promotion'] or 0 }},
+                        {{ categories['General'] or 0 }}
+                    ],
+                    backgroundColor: ['#ff9800', '#2196f3', '#9c27b0']
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        precision: 0
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

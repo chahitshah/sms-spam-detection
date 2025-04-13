@@ -1,0 +1,5 @@
+Text,Prediction,Category,Feedback
+"Get 90% OFF on your favorite brands today only! Reply YES to subscribe.
+",Not Spam,Ham,negative
+"You have been selected for a FREE gift voucher worth ₹1000. Call now!
+",Spam,Promotion,positive
